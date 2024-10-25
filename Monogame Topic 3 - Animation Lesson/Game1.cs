@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -16,6 +17,9 @@ namespace Monogame_Topic_3___Animation_Lesson
         Rectangle greyTribbleRect, brownTribbleRect, creamTribbleRect, orangeTribbleRect;
 
         Vector2 greyTribbleSpeed, brownTribbleSpeed, creamTribbleSpeed, orangeTribbleSpeed;
+
+        SoundEffect tribbleCoo;
+
         Random generator = new Random();
 
         public Game1()
@@ -55,6 +59,7 @@ namespace Monogame_Topic_3___Animation_Lesson
             brownTribbleTexture = Content.Load<Texture2D>("tribbleBrown");
             creamTribbleTexture = Content.Load<Texture2D>("tribbleCream");
             orangeTribbleTexture = Content.Load<Texture2D>("tribbleOrange");
+            tribbleCoo = Content.Load<SoundEffect>("tribble_coo");
         }
 
         protected override void Update(GameTime gameTime)
@@ -73,20 +78,35 @@ namespace Monogame_Topic_3___Animation_Lesson
             orangeTribbleRect.Y += (int)orangeTribbleSpeed.Y;
 
             if (greyTribbleRect.Right >= window.Width || greyTribbleRect.Left <= 0)
+            {
                 greyTribbleSpeed.X *= -1;
+                tribbleCoo.Play();
+            }
             if (greyTribbleRect.Bottom >= window.Height || greyTribbleRect.Top <= 0)
+            {
                 greyTribbleSpeed.Y *= -1;
+                tribbleCoo.Play();
+            }
 
             if (brownTribbleRect.Left >= window.Width)
                 brownTribbleRect.X = -99;
 
             if (creamTribbleRect.Bottom >= window.Height || creamTribbleRect.Top <= 0)
+            {
                 creamTribbleSpeed.Y *= -1;
+                tribbleCoo.Play();
+            }
 
             if (orangeTribbleRect.Right >= window.Width || orangeTribbleRect.Left <= 0)
+            {
                 orangeTribbleSpeed.X *= -1;
+                tribbleCoo.Play();
+            }
             if (orangeTribbleRect.Bottom >= window.Height || orangeTribbleRect.Top <= 0)
+            {
                 orangeTribbleSpeed.Y *= -1;
+                tribbleCoo.Play();
+            }
 
             base.Update(gameTime);
         }
